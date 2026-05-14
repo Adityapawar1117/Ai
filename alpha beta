@@ -1,0 +1,49 @@
+def alphabeta(node, depth, alpha, beta, maximizingPlayer):
+
+    # Base condition: if leaf node reached
+    if depth == 0:
+        return node
+    # MAX Player
+    if maximizingPlayer:
+        maxEval = float('-inf')
+
+        for child in node:
+            eval = alphabeta(child, depth - 1, alpha, beta, False)
+            maxEval = max(maxEval, eval)
+            alpha = max(alpha, eval)
+
+            # Pruning condition
+            if beta <= alpha:
+                break
+        return maxEval
+    # MIN Player
+    else:
+        minEval = float('inf')
+
+        for child in node:
+            eval = alphabeta(child, depth - 1, alpha, beta, True)
+            minEval = min(minEval, eval)
+            beta = min(beta, eval)
+            # Pruning condition
+            if beta <= alpha:
+                break
+
+        return minEval
+
+
+# Constructing 3-level tree
+game_tree = [
+    [
+        [3, 5],
+        [6, 9]
+    ],
+    [
+        [1, 2],
+        [0, -1]
+    ]
+]
+
+# Calling function
+optimal_value = alphabeta(game_tree, 3, float('-inf'), float('inf'), True)
+
+print("Optimal Value:", optimal_value)

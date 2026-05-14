@@ -1,0 +1,43 @@
+def job_scheduling(jobs):
+    # Sort jobs by profit (descending)
+    jobs.sort(key=lambda x: x[2], reverse=True)
+
+    max_deadline = max(job[1] for job in jobs)
+
+    # Create time slots
+    slots = [None] * max_deadline
+
+    total_profit = 0
+    selected_jobs = []
+
+    # Schedule jobs
+    for job in jobs:
+        job_id = job[0]
+        deadline = job[1]
+        profit = job[2]
+
+        # Try to assign job to latest possible free slot
+        for i in range(deadline - 1, -1, -1):
+            if slots[i] is None:
+                slots[i] = job_id
+                total_profit += profit
+                selected_jobs.append(job_id)
+                break
+
+    return slots, selected_jobs, total_profit
+
+jobs = [
+    ("J1", 2, 40),
+    ("J2", 1, 35),
+    ("J3", 3, 30),
+    ("J4", 2, 25),
+    ("J5", 1, 20),
+    ("J6", 3, 15),
+    ("J7", 2, 10)
+]
+
+slots, selected_jobs, total_profit = job_scheduling(jobs)
+
+print("Scheduled Slots:", slots)
+print("Selected Jobs:", selected_jobs)
+print("Total Profit:", total_profit)

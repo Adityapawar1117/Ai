@@ -1,0 +1,28 @@
+def chatbot():
+    print(" Welcome to Customer Support Chatbot ")
+    print("-------------------------------")
+    while True:
+        user_input = input("\nYou: ").lower()
+        if user_input == "bye":
+            print("Bot: Thank you for contacting us. Have a great day!")
+            break
+
+        elif "hello" in user_input or "hi" in user_input or "hey" in user_input:
+            print("Bot: Hello! How can I assist you today?")
+
+        elif "working hours" in user_input or "timing" in user_input or "open" in user_input:
+            print("Bot: Our working hours are Monday to Saturday, 9 AM to 6 PM.")
+
+        elif "contact" in user_input or "support" in user_input or "phone" in user_input:
+            print("Bot: You can contact our support team at support@example.com or call 9876543210.")
+
+        elif "service" in user_input:
+            print("Bot: We provide product support, order tracking, and complaint resolution services.")
+
+        elif "thank" in user_input:
+            print("Bot: You're welcome! Happy to help.")
+
+        else:
+            print("Bot: I'm sorry, I didn't understand that. Please try asking something else.")
+
+chatbot()

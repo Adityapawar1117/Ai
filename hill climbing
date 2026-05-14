@@ -1,0 +1,81 @@
+import copy
+import random
+goal = [[1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 0]]
+def heuristic(state):
+    count = 0
+    for i in range(3):
+        for j in range(3):
+            if state[i][j] != 0 and state[i][j] != goal[i][j]:
+                count += 1
+    return count
+def find_blank(state):
+    for i in range(3):
+        for j in range(3):
+            if state[i][j] == 0:
+                return i, j
+def get_neighbors(state):
+    neighbors = []
+    x, y = find_blank(state)
+    moves = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    for dx, dy in moves:
+        nx, ny = x + dx, y + dy
+        if 0 <= nx < 3 and 0 <= ny < 3:
+            new_state = copy.deepcopy(state)
+            new_state[x][y], new_state[nx][ny] = new_state[nx][ny], new_state[x][y]
+            neighbors.append(new_state)
+    return neighbors
+def hill_climbing(start):
+    current = start
+    while True:
+        neighbors = get_neighbors(current)
+        current_h = heuristic(current)
+        best = current
+        best_h = current_h
+
+        for n in neighbors:
+            h = heuristic(n)
+            if h < best_h:
+                best = n
+                best_h = h
+        if best_h >= current_h:
+            break
+        current = best
+        if best_h == 0:
+            break
+    return current
+def random_restart(start, max_restarts=5):
+    best = start
+    best_h = heuristic(start)
+    for i in range(max_restarts):
+        print("\nRestart", i + 1)
+        result = hill_climbing(start)
+        h_val = heuristic(result)
+        print("State:")
+        for row in result:
+            print(row)
+        print("Heuristic:", h_val)
+        if h_val < best_h:
+            best = result
+            best_h = h_val
+        if h_val == 0:
+            print("Solution Found!")
+            return result
+        nums = list(range(9))
+        random.shuffle(nums)
+        start = [nums[i:i + 3] for i in range(0, 9, 3)]
+    return best
+def print_state(state):
+    for row in state:
+        print(row)
+    print()
+start = [[2, 8, 3],
+         [1, 6, 4],
+         [7, 0, 5]]
+print("Initial State:")
+print_state(start)
+result = random_restart(start, 10)
+print("\nFinal Best State:")
+print_state(result)
+print("Final Heuristic:", heuristic(result))

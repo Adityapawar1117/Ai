@@ -1,0 +1,64 @@
+def dijkstra(graph, start):
+
+    # Store shortest distances
+    distances = {}
+
+    # Initialize all distances as infinity
+    for node in graph:
+        distances[node] = float('inf')
+
+    # Distance to start node = 0
+    distances[start] = 0
+
+    visited = []
+
+    while len(visited) < len(graph):
+
+        # Find node with minimum distance
+        min_node = None
+
+        for node in graph:
+
+            if node not in visited:
+
+                if min_node is None or distances[node] < distances[min_node]:
+
+                    min_node = node
+
+        # Mark node as visited
+        visited.append(min_node)
+
+        # Update distances of neighbours
+        for neighbour, weight in graph[min_node].items():
+
+            new_distance = distances[min_node] + weight
+
+            if new_distance < distances[neighbour]:
+
+                distances[neighbour] = new_distance
+
+    return distances
+
+
+# Weighted Graph
+graph = {
+
+    'A': {'B': 2, 'C': 4},
+
+    'B': {'A': 2, 'C': 1, 'D': 7},
+
+    'C': {'A': 4, 'B': 1, 'D': 3},
+
+    'D': {'B': 7, 'C': 3}
+
+}
+
+# Function Call
+result = dijkstra(graph, 'A')
+
+# Print Shortest Distances
+print("Shortest Distances from A:")
+
+for node in result:
+
+    print(node, "=", result[node])

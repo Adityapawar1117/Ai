@@ -1,0 +1,53 @@
+# Simple Online Shopping Chatbot
+
+while True:
+
+    print("\n===== ONLINE SHOPPING CHATBOT =====")
+    print("1. Product Search")
+    print("2. Order Tracking")
+    print("3. Return Policy")
+    print("4. Payment Methods")
+    print("5. Exit")
+
+    choice = input("Enter your choice: ")
+
+    # Product Search
+    if choice == '1':
+
+        product = input("Enter product name: ")
+
+        print("Searching for", product, "...")
+        print(product, "is available in stock.")
+
+    # Order Tracking
+    elif choice == '2':
+
+        order_id = input("Enter Order ID: ")
+
+        print("Order", order_id, "is out for delivery.")
+
+    # Return Policy
+    elif choice == '3':
+
+        print("Return Policy:")
+        print("Products can be returned within 7 days.")
+
+    # Payment Methods
+    elif choice == '4':
+
+        print("Available Payment Methods:")
+        print("1. Credit Card")
+        print("2. Debit Card")
+        print("3. UPI")
+        print("4. Cash on Delivery")
+
+    # Exit
+    elif choice == '5':
+
+        print("Thank you for using chatbot!")
+        break
+
+    # Invalid Choice
+    else:
+
+        print("Invalid Choice! Please try again.")

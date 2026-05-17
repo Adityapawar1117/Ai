@@ -1,0 +1,54 @@
+while True:
+
+    print("\n===== RAILWAY CHATBOT =====")
+    print("1. Train Timings")
+    print("2. Ticket Booking Guidance")
+    print("3. Fare Enquiry")
+    print("4. Seat Availability")
+    print("5. Exit")
+
+    choice = input("Enter your choice: ")
+
+    # Train Timings
+    if choice == '1':
+
+        train = input("Enter Train Name: ")
+
+        print(train, "arrives at 10:30 AM")
+        print(train, "departs at 10:45 AM")
+
+    # Ticket Booking
+    elif choice == '2':
+
+        print("Ticket Booking Guidance:")
+        print("1. Visit railway website")
+        print("2. Enter source and destination")
+        print("3. Select train")
+        print("4. Make payment")
+        print("5. Ticket booked successfully")
+
+    # Fare Enquiry
+    elif choice == '3':
+
+        source = input("Enter Source Station: ")
+        destination = input("Enter Destination Station: ")
+
+        print("Fare from", source, "to", destination, "is Rs. 450")
+
+    # Seat Availability
+    elif choice == '4':
+
+        train = input("Enter Train Name: ")
+
+        print("Seats are available in", train)
+
+    # Exit
+    elif choice == '5':
+
+        print("Thank you for using Railway Chatbot!")
+        break
+
+    # Invalid Choice
+    else:
+
+        print("Invalid Choice! Please try again.")

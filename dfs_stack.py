@@ -1,0 +1,34 @@
+# DFS using Stack
+
+# Graph representation
+graph = {
+    'P': ['Q', 'R', 'S'],
+    'Q': ['P', 'R'],
+    'R': ['P', 'Q', 'T'],
+    'S': ['P'],
+    'T': ['R']
+}
+
+def dfs(start):
+
+    visited = set()
+
+    stack = [start]
+
+    while stack:
+
+        node = stack.pop()
+
+        if node not in visited:
+
+            print(node, end=" ")
+
+            visited.add(node)
+
+            # Push neighbors into stack
+            for neighbor in reversed(graph[node]):
+                if neighbor not in visited:
+                    stack.append(neighbor)
+
+# Function call
+dfs('P')
